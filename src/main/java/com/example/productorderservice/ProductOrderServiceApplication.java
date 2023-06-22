@@ -1,4 +1,4 @@
-package productorderservice.productorderservice;
+package com.example.productorderservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
