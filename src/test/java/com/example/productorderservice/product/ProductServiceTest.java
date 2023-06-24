@@ -13,11 +13,13 @@ public class ProductServiceTest {
         productService.addProduct(request);
     }
 
-    private class AddProductRequest {
-        public AddProductRequest(String name, int price, DiscountPolicy discountPolicy) {
-
+    private record AddProductRequest(String name, int price, DiscountPolicy discountPolicy) {
+        private AddProductRequest {
+            Assert.hasText(name, "상품명 필수");
+            Assert.isTrue(price > 0, "0보다크게");
+            Assert.notNull(discountPolicy, "할인필수");
         }
-    }
+        }
 
     private enum DiscountPolicy {
         NONE
