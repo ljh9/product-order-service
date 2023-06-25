@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
 public class ProductServiceTest {
+    private ProducService productService;
+
     @Test
     void add() {
         final String name = "상품명";
@@ -13,6 +15,12 @@ public class ProductServiceTest {
         productService.addProduct(request);
     }
 
+    private class ProducService {
+        public void addProduct(final AddProductRequest request) {
+            throw new UnsupportedOperationException("");
+        }
+    }
+    
     private record AddProductRequest(String name, int price, DiscountPolicy discountPolicy) {
         private AddProductRequest {
             Assert.hasText(name, "상품명 필수");
@@ -24,4 +32,6 @@ public class ProductServiceTest {
     private enum DiscountPolicy {
         NONE
     }
+
+
 }
