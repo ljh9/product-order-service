@@ -2,15 +2,21 @@ package com.example.productorderservice.product;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.mock.web.server.MockWebSession;
 import org.springframework.util.Assert;
 
 public class ProductServiceTest {
-    private ProducService productService;
+    private ProductService productService;
+    private ProductPort productPort;
 
     @BeforeEach
     void setUp() {
-        productService = new ProducService();
+        productPort = new ProductPort() {
+            @Override
+            public void save(final Product product) {
+
+            }
+        };
+        productService = new ProductService(productPort);
     }
 
     @Test
@@ -22,8 +28,12 @@ public class ProductServiceTest {
         productService.addProduct(request);
     }
 
-    private class ProducService {
-        private ProductPort productPort;
+    private class ProductService {
+        private final ProductPort productPort;
+
+        private ProductService(final ProductPort productPort) {
+            this.productPort = productPort;
+        }
 
         public void addProduct(final AddProductRequest request) {
             final Product product = new Product(request.name(), request.price(), request.discountPolicy());
@@ -62,5 +72,12 @@ public class ProductServiceTest {
 
     private interface ProductPort {
         void save(final Product product);
+    }
+
+    private class ProductAdapter implements ProductPort {
+        @Override
+        public void save(final Product product){
+
+        }
     }
 }
