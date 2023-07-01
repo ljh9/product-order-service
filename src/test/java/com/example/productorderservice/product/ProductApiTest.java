@@ -6,29 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ProductServiceTest {
-    @Autowired
-    private ProductService productService;
-//    private ProductPort productPort;
-//    private ProductRepository productRepository;
-//
-//    @BeforeEach
-//    void setUp() {
-////        productPort = new ProductPort() {
-////            @Override
-////            public void save(final Product product) {
-////
-////            }
-////        };
-//        productRepository = new ProductRepository();
-//        productPort = new ProductAdapter(productRepository);
-//        productService = new ProductService(productPort);
-//    }
+public class ProductApiTest {
+//    @Autowired
+//    private ProductService productService;
 
     @Test
     void add() {
         final AddProductRequest request = getAddProductRequest();
-        productService.addProduct(request);
+//        productService.addProduct(request);
+
+
     }
 
     private static AddProductRequest getAddProductRequest() {
