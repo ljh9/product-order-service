@@ -1,20 +1,33 @@
 package com.example.productorderservice.product;
 
-import org.junit.jupiter.api.BeforeEach;
+import com.example.productorderservice.ApiTest;
+import io.restassured.RestAssured;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
+import org.apache.http.HttpStatus;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 
 @SpringBootTest
-public class ProductApiTest {
-//    @Autowired
-//    private ProductService productService;
+public class ProductApiTest extends ApiTest {
 
     @Test
     void add() {
         final AddProductRequest request = getAddProductRequest();
-//        productService.addProduct(request);
 
+        final ExtractableResponse<Response> response = RestAssured.given().log().all()
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .body(request)
+                .when()
+                .post("/products")
+                .then()
+                .log().all().extract();
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
     }
 
