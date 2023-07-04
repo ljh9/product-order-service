@@ -17,18 +17,22 @@ public class ProductApiTest extends ApiTest {
 
     @Test
     void add() {
-        final AddProductRequest request = getAddProductRequest();
+        final var request = getAddProductRequest();
 
-        final ExtractableResponse<Response> response = RestAssured.given().log().all()
+        final var response = addProductRequest(request);
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+
+    }
+
+    private  static ExtractableResponse<Response> addProductRequest(final AddProductRequest request){
+        return RestAssured.given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(request)
                 .when()
                 .post("/products")
                 .then()
                 .log().all().extract();
-
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
-
     }
 
     private static AddProductRequest getAddProductRequest() {
