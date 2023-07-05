@@ -2,7 +2,14 @@ package com.example.productorderservice.product;
 
 import org.springframework.util.Assert;
 
+@Entity
+@Table(name = "products")
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
     private final String name;
@@ -19,11 +26,4 @@ class Product {
         this.discountPolicy = discountPolicy;
     }
 
-    public void assignId(final Long aLong) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
 }
