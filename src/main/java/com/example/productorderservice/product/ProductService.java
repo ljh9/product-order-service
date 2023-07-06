@@ -13,6 +13,7 @@ class ProductService {
     }
 
     @PostMapping
+    @Transectional
     public ResponseEntity<Void> addProduct(@RequestBody final AddProductRequest request) {
         final Product product = new Product(request.name(), request.price(), request.discountPolicy());
 
