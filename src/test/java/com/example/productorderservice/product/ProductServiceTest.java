@@ -1,13 +1,17 @@
 package com.example.productorderservice.product;
 
+import com.sun.media.sound.SF2Soundbank;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
 public class ProductServiceTest {
 
+    private ProductService productService;
+
     @Test
     void list() {
 
+        productService.addProduct();
         final long productId = 1L;
 
         final GetProductResponse response = productService.getProduct(productId);
