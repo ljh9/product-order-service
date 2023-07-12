@@ -8,7 +8,7 @@ record GetProductResponse(
         int price,
         DiscountPolicy discountPolicy
 ) {
-    private GetProductResponse {
+    GetProductResponse {
         Assert.notNull(id, "id");
         Assert.hasText(name, "name");
         Assert.notNull(discountPolicy, "policy");
