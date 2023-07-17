@@ -30,13 +30,17 @@ public class ProductApiTest extends ApiTest {
         ProductSteps.addProductRequest(ProductSteps.getAddProductRequest());
         Long productId = 1L;
 
-        final ExtractableResponse<Response> response = RestAssured.given().log().all()
+        final ExtractableResponse<Response> response = updateProductRequest(productId);
+
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
+        assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");
+    }
+
+    public static ExtractableResponse<Response> updateProductRequest(final Long productId){
+        return RestAssured.given().log().all()
                 .when()
                 .get("/products/{productid}", productId)
                 .then().log().all()
                 .extract();
-
-        assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");
     }
 }
