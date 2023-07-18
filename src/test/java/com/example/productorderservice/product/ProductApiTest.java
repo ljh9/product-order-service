@@ -1,7 +1,6 @@
 package com.example.productorderservice.product;
 
 import com.example.productorderservice.ApiTest;
-import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
@@ -30,17 +29,10 @@ public class ProductApiTest extends ApiTest {
         ProductSteps.addProductRequest(ProductSteps.getAddProductRequest());
         Long productId = 1L;
 
-        final ExtractableResponse<Response> response = updateProductRequest(productId);
+        final ExtractableResponse<Response> response = ProductSteps.updateProductRequest(productId);
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");
     }
 
-    public static ExtractableResponse<Response> updateProductRequest(final Long productId){
-        return RestAssured.given().log().all()
-                .when()
-                .get("/products/{productid}", productId)
-                .then().log().all()
-                .extract();
-    }
 }
