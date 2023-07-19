@@ -27,6 +27,10 @@ class ProductService {
         final Product product = productPort.getProduct(productId);
         final GetProductResponse response = new GetProductResponse(product.getId(), product.getName(), product.getPrice(), product.getDiscountPolicy());
 
-        return ResponseEntity.ok(response)
+        return ResponseEntity.ok(response);
+    }
+
+    public void updateProduct(Long productId, UpdateProductRequest request) {
+        throw new UnsupportedOperationException("");
     }
 }
