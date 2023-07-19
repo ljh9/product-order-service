@@ -29,7 +29,7 @@ public class ProductApiTest extends ApiTest {
         ProductSteps.addProductRequest(ProductSteps.getAddProductRequest());
         Long productId = 1L;
 
-        final ExtractableResponse<Response> response = ProductSteps.updateProductRequest(productId);
+        final ExtractableResponse<Response> response = ProductSteps.listProductRequest(productId);
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");

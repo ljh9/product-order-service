@@ -22,7 +22,7 @@ public class ProductSteps {
         return new AddProductRequest(name, price, discountPolicy);
     }
 
-    public static ExtractableResponse<Response> updateProductRequest(final Long productId){
+    public static ExtractableResponse<Response> listProductRequest(final Long productId){
         return RestAssured.given().log().all()
                 .when()
                 .get("/products/{productid}", productId)
